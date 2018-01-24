@@ -51,7 +51,7 @@ def get_next_checkpoint(date, day):
 
 def get_all_checkpoints(start, end, day):
     """
-    вычисляет все даты начисления и заности их в список checkpoints
+    вычисляет все даты начисления и заносит их в список checkpoints
     """
     first_checkpoint = get_first_checkpoint(start, end, day)
     previous_checkpoint = first_checkpoint
@@ -76,7 +76,7 @@ credits = {credit.date: -credit.amount for credit in account.credit_set.all()}
 
 def print_payments(debets, credits, rate):
     """
-    цикл, проходя по всем датам долга, сравнивает дату с датами в массивах, получая представление о хронологии событий
+    цикл, проходя по всем датам долгаv, сравнивает дату с датами в массивах, получая представление о хронологии событий
     и о самих событиях, согласно которым вносит изменения в переменные, хранящие состояние. Печатает выплаты.
     """
     percent_to_pay_this_month = 0
