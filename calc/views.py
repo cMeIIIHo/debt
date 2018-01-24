@@ -74,29 +74,32 @@ debets = {debet.date: debet.amount for debet in account.debet_set.all()}
 credits = {credit.date: -credit.amount for credit in account.credit_set.all()}
 
 
-# ниже цикл по датам от первого поступления долга и до его погашения
-# сравнивая дату с данными в вышеупомянутых массивах, получаем события в этот день
-# объявленные перед циклом, и изменяемые им переменные, позволяют отслеживать и выводить на печать состояние
-percent_to_pay_this_month = 0
-balance = 0
-today = start
-for i in range((end-today).days):
-    if today in debets:
-        balance += debets[today]
-    if today in credits:
-        balance += credits[today]
-    today = today + datetime.timedelta(days=1)
-    if calendar.isleap(today.year):
-        days_in_year = 366
-    else:
-        days_in_year = 365
-    percent_to_pay_this_day = balance * rate / days_in_year
-    percent_to_pay_this_month += percent_to_pay_this_day
-    if today in checkpoints:
-        print(today, percent_to_pay_this_month)                   # вывод очередной даты начисления и начисленной суммы
-        percent_to_pay_this_month = 0
+def print_payments(debets, credits, rate):
+    """
+    цикл, проходя по всем датам долга, сравнивает дату с датами в массивах, получая представление о хронологии событий
+    и о самих событиях, согласно которым вносит изменения в переменные, хранящие состояние. Печатает выплаты.
+    """
+    percent_to_pay_this_month = 0
+    balance = 0
+    today = start
+    for i in range((end-today).days):
+        if today in debets:
+            balance += debets[today]
+        if today in credits:
+            balance += credits[today]
+        today = today + datetime.timedelta(days=1)
+        if calendar.isleap(today.year):
+            days_in_year = 366
+        else:
+            days_in_year = 365
+        percent_to_pay_this_day = balance * rate / days_in_year
+        percent_to_pay_this_month += percent_to_pay_this_day
+        if today in checkpoints:
+            print(f'в день {today} начислено {percent_to_pay_this_month}')  # вывод в консоль
+            percent_to_pay_this_month = 0
 
 
+print_payments(debets, credits, rate)
 
 
 
