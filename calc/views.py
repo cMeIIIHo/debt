@@ -27,7 +27,7 @@ def get_first_checkpoint(start, end, day):
     elif start.day <= calendar.monthrange(start.year, start.month)[1] < day:
         date = datetime.date(start.year, start.month, calendar.monthrange(start.year, start.month)[1])
         checkpoints.append(date)
-    elif day <= start.day:
+    else:
         date = datetime.date(start.year, start.month, day)
     return date
 
