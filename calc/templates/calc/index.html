@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% if accounts %}
+    ACCOUNTS:
+    {% for account in accounts %}
+        <div class="account">
+            <a href="{% url 'calc:show_accruals' account.id %}">accout id: {{account.id}}</a>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% if accruals %}
+    {% for date, accrual in accruals.items %}
+        <div class="accrual">{{date}}:    {{accrual}}</div>
+    {% endfor %}
+{% endif %}
+</body>
+</html>

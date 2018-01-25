@@ -17,7 +17,7 @@ class Debet(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return f'{self.account.number} - {self.amount} - {self.date}'
+        return '%s - %s - %s' % (self.account.number, self.amount, self.date, )
 
 
 class Credit(models.Model):
@@ -30,4 +30,4 @@ class Credit(models.Model):
     date = models.DateField()
 
     def __str__(self):
-        return f'{self.account.number} - {self.amount} - {self.date}'
+        return '%s - %s - %s' % (self.account.number, self.amount, self.date,)
